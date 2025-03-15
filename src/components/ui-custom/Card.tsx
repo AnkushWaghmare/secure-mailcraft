@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<"div">> {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<"div">> {
   variant?: 'default' | 'glass';
   hoverable?: boolean;
   pressable?: boolean;
+  children?: React.ReactNode;
+  className?: string;
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(

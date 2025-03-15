@@ -3,11 +3,14 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof HTMLMotionProps<"input">> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof HTMLMotionProps<"input">> {
   label?: string;
   error?: string;
   icon?: React.ReactNode;
   variant?: 'default' | 'glass';
+  className?: string;
+  placeholder?: string;
+  type?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
