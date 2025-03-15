@@ -26,14 +26,14 @@ const sampleEmails = [
   { 
     sender: 'Amazon <auto-confirm@amazon.com>',
     subject: 'Your Amazon.com order confirmation',
-    preview: 'Hello, thank you for your order. We'll send a confirmation when your item ships.',
+    preview: "Hello, thank you for your order. We'll send a confirmation when your item ships.",
     date: '1 day ago',
     isRead: true
   },
   { 
     sender: 'Spotify <no-reply@spotify.com>',
     subject: 'Get more out of Spotify',
-    preview: 'Discover more music tailored to your taste. We've personalized some recommendations just for you.',
+    preview: "Discover more music tailored to your taste. We've personalized some recommendations just for you.",
     date: '3 days ago',
     isRead: false
   }
