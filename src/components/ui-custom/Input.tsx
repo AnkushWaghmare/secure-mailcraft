@@ -13,6 +13,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   type?: string;
   value?: string | number | readonly string[];
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  required?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
