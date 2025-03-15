@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<"div">> {
   variant?: 'default' | 'glass';
   hoverable?: boolean;
   pressable?: boolean;
@@ -53,7 +53,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         onMouseLeave={handleMouseLeave}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        {...props}
+        {...props as any} // Type assertion to avoid conflicts
       >
         {children}
       </motion.div>

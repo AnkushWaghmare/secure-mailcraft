@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof HTMLMotionProps<"input">> {
   label?: string;
   error?: string;
   icon?: React.ReactNode;
@@ -35,7 +35,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               error && "border-destructive focus-visible:ring-destructive",
               className
             )}
-            {...props}
+            {...props as any} // Type assertion to avoid conflicts
           />
         </div>
         {error && (

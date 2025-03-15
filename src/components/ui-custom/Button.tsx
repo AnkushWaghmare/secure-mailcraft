@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof HTMLMotionProps<"button">> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
@@ -48,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           fullWidth ? 'w-full' : '',
           className
         )}
-        {...props}
+        {...props as any} // Type assertion to avoid conflicts
       >
         {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
         {children}
