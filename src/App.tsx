@@ -10,6 +10,8 @@ import Dashboard from "./pages/Dashboard";
 import Emails from "./pages/Emails";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Header from "./components/layout/Header";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/emails" element={<Emails />} />
             <Route path="/settings" element={<Settings />} />
