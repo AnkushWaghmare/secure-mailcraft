@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { AuthService, SignUpData } from '@/services/auth.service';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -15,10 +16,11 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!agreedToTerms) {
@@ -31,16 +33,34 @@ const SignUp = () => {
     }
     
     setIsLoading(true);
+    setError('');
     
-    // Simulate signup process
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const signUpData: SignUpData = {
+        name,
+        email,
+        password
+      };
+      
+      const user = await AuthService.signUp(signUpData);
+      
       toast({
         title: "Account created!",
-        description: "Welcome to our application.",
+        description: `Welcome, ${user.name}!`,
       });
+      
+      // Redirect to dashboard after successful signup
       navigate('/dashboard');
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      toast({
+        title: "Sign up failed",
+        description: err instanceof Error ? err.message : 'An unexpected error occurred',
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

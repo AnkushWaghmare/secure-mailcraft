@@ -8,28 +8,48 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { AuthService, LoginCredentials } from '@/services/auth.service';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
     
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const credentials: LoginCredentials = { 
+        email, 
+        password, 
+        rememberMe 
+      };
+      
+      const user = await AuthService.login(credentials);
+      
       toast({
         title: "Login successful!",
-        description: "Welcome back to the application.",
+        description: `Welcome back, ${user.name}!`,
       });
+      
+      // Redirect to dashboard after successful login
       navigate('/dashboard');
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      toast({
+        title: "Login failed",
+        description: err instanceof Error ? err.message : 'An unexpected error occurred',
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
