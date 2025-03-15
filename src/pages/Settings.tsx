@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui-custom
 import Button from '@/components/ui-custom/Button';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
-import { Settings as SettingsIcon, Shield, Bell, RefreshCw, Lock, User, Smartphone, LogOut } from 'lucide-react';
+import { Settings as SettingsIcon, Shield, Bell, RefreshCw, Lock, User, LogOut } from 'lucide-react';
 
 const SettingRow = ({ 
   icon, 
@@ -59,14 +59,6 @@ const Settings = () => {
                 </SettingRow>
                 
                 <SettingRow
-                  icon={<Smartphone size={20} />}
-                  title="Connected Devices"
-                  description="Manage devices that have access to your account"
-                >
-                  <Button variant="outline" size="sm">Manage</Button>
-                </SettingRow>
-                
-                <SettingRow
                   icon={<LogOut size={20} />}
                   title="Sign Out"
                   description="Log out from your current session"
@@ -92,29 +84,6 @@ const Settings = () => {
                   description="Add an extra layer of security to your account"
                 >
                   <Switch id="two-factor" />
-                </SettingRow>
-                
-                <SettingRow
-                  icon={<Smartphone size={20} />}
-                  title="Biometric Unlock"
-                  description="Use fingerprint or face recognition to unlock the app"
-                >
-                  <Switch id="biometric" defaultChecked />
-                </SettingRow>
-                
-                <SettingRow
-                  icon={<RefreshCw size={20} />}
-                  title="Auto-Lock"
-                  description="Automatically lock the app after inactivity"
-                >
-                  <div className="flex items-center space-x-2">
-                    <select className="h-9 rounded-md border border-input bg-background px-3 text-sm">
-                      <option value="1">1 minute</option>
-                      <option value="5">5 minutes</option>
-                      <option value="15">15 minutes</option>
-                      <option value="30">30 minutes</option>
-                    </select>
-                  </div>
                 </SettingRow>
               </CardContent>
             </Card>

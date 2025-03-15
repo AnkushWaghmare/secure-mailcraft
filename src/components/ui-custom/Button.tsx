@@ -11,6 +11,7 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
   iconPosition?: 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -22,6 +23,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     fullWidth = false,
     icon,
     iconPosition = 'left',
+    onClick,
     ...props
   }, ref) => {
     const variants = {
@@ -50,6 +52,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           fullWidth ? 'w-full' : '',
           className
         )}
+        onClick={onClick}
         {...props as any} // Type assertion to avoid conflicts
       >
         {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
